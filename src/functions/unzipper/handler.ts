@@ -1,29 +1,24 @@
 import 'source-map-support/register';
-import s3UnzipPlus from '../../libs/unzip'
-import { middyfy } from '../../libs/lambda';
+import { S3Event } from 'aws-lambda'
+import { s3UnzipPlus } from '../../libs/unzip'
+import { middyfy } from '../../libs/lambda'
 
-const unzipper = async function(event) {
+const unzipper = async function(event: S3Event) {
+  const bucketName: string = event.Records[0].s3.bucket.name;
+  const filename: string = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '))
 
-  console.log(JSON.stringify(event, null, 2))
-
-  const bucketName = event.Records[0].s3.bucket.name;
-  const filename = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '))
-
-  await new s3UnzipPlus({
-    bucket: bucketName,
-    file: filename,
-    targetBucket: bucketName,
-    copyMetadata: true,
-    deleteOnSuccess: true,
-    verbose: false
-  }, function(err, data){
-    if (err) console.log(err)
-    else console.log(data)
-  })
-  
-  console.log(`Bucket name is: ${bucketName}`)
-  console.log(`Keyname is ${filename}`)
-
+  try {
+    await s3UnzipPlus({
+      bucket: bucketName,
+      targetBucket: bucketName,
+      file: filename,
+      copyMetadata: true,
+      deleteOnSuccess: true,
+      verbose: false,
+    })
+  } catch (err) {
+    console.log(err)
+  }
 } 
 
 export const main = middyfy(unzipper);

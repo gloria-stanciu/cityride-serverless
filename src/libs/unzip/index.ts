@@ -1,32 +1,19 @@
 'use strict'
 import { decompress } from './util'
+import { Command } from './util'
 
-function s3UnzipPlus(command, cb) {
-  if (cb === undefined) { cb = function () { } }
-  let vBucket, vFile, vTargetBucket, vTargetFolder
-  if (command.args && command.args.length >= 4) {
-    vBucket = command.args[0]
-    vFile = command.args[1]
-    vTargetBucket = command.args[2]
-    vTargetFolder = command.args[3]
-  }
-  if (command.bucket) {
-    vBucket = command.bucket
-  }
-  if (command.file) {
-    vFile = command.file
-  }
-  if (command.targetBucket) {
-    vTargetBucket = command.targetBucket
-  } else {
-    vTargetBucket = command.bucket
-  }
-  if (command.targetFolder) {
-    vTargetFolder = command.targetFolder
-  } else {
-    vTargetFolder = ''
-  }
-  decompress({
+export async function s3UnzipPlus(command: Command): Promise<void> {
+  let vBucket: string
+  let vFile: string
+  let vTargetBucket: string
+  let vTargetFolder: string
+
+  vBucket = command.bucket
+  vFile = command.file
+  vTargetBucket = command.targetBucket || command.bucket
+  vTargetFolder = command.targetFolder || ''
+
+  await decompress({
     bucket: vBucket,
     file: vFile,
     targetBucket: vTargetBucket,
@@ -34,8 +21,5 @@ function s3UnzipPlus(command, cb) {
     deleteOnSuccess: command.deleteOnSuccess,
     copyMetadata: command.copyMetadata,
     verbose: command.verbose
-  }, cb)
-  console.log('intra in decompress')
+  })
 }
-
-export default s3UnzipPlus

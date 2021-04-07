@@ -8,8 +8,9 @@ export default {
         bucket: 'cityride-bucket-project',
         event: 's3:ObjectCreated:*',
         rules: [
-          {prefix: 'zip/'}
-          
+          {
+            prefix: 'zip/'
+          }
         ]
       }
     }

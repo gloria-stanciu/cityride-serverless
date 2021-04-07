@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@serverless/typescript": "^2.33.0",
+    "@types/adm-zip": "^0.4.34",
     "@types/aws-lambda": "^8.10.64",
     "@types/jest": "^26.0.14",
     "@types/knex": "^0.16.1",

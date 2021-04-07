@@ -12,8 +12,17 @@ const serverlessConfiguration: AWS = {
       forceInclude: ['pg'],
       ignorePackages: ['pg-native'],
       linting: false,
-      // aliases:[{"@libs": 'src/libs/'}],
+      aliases:[
+        { "@libs": 'src/libs/' },
+        { "@": './' }
+      ],
       externals: 'all',
+      copyFiles: [
+        {
+          from: 'rds-combined-ca-bundle.pem',
+          to: './'
+        }
+      ]
     }
   },
   plugins: ['serverless-bundle'],
