@@ -4,7 +4,6 @@ import { middyfy } from "../../libs/lambda";
 import { connectToDb } from "../../libs/knexfile";
 import Knex from "knex";
 
-// const dbUrl = process.env.DATABASE_URL;
 const knex = Knex(connectToDb);
 
 const agencies = async function (event: S3Event) {

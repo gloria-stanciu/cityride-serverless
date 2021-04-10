@@ -1,5 +1,4 @@
 import { handlerPath } from '../../libs/handlerResolver';
-import { stateMachineARN } from '../common'
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.main`,
@@ -10,11 +9,10 @@ export default {
         event: 's3:ObjectCreated:*',
         rules: [
           {
-            prefix: 'zip/'
+            prefix: 'function1/'
           }
         ]
-      },
+      }
     }
-  ],
-  environment: stateMachineARN
+  ]
 }

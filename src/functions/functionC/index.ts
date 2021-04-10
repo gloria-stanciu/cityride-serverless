@@ -1,5 +1,4 @@
 import { handlerPath } from '../../libs/handlerResolver';
-import { stateMachineARN } from '../common'
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.main`,
@@ -7,14 +6,13 @@ export default {
     {
       s3: {
         bucket: 'cityride-bucket-project',
-        event: 's3:ObjectCreated:*',
+        // event: 's3:ObjectCreated:*',
         rules: [
           {
-            prefix: 'zip/'
+            prefix: 'function3/'
           }
         ]
-      },
+      }
     }
-  ],
-  environment: stateMachineARN
+  ]
 }

@@ -35,7 +35,6 @@ export interface Command {
   copyMetadata: boolean
   verbose: boolean
 }
-
 export const decompress = async function (command: Command): Promise<void> {
   let targetBucket = command.targetBucket || command.bucket;
 
