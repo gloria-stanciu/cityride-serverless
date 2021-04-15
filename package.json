@@ -30,6 +30,7 @@
     "@middy/http-json-body-parser": "^2.0.0",
     "adm-zip": "^0.5.5",
     "aws-sdk": "^2.883.0",
+    "csv-parse": "^4.15.3",
     "date-time": "^3.1.0",
     "fs": "^0.0.1-security",
     "json-schema-to-ts": "^1.6.1",

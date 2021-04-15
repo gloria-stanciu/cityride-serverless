@@ -18,8 +18,8 @@ const unzipper = async function(event: S3Event) {
     })
     const statemachine_arn = process.env.statemachine_arn 
     const params:AWS.StepFunctions.StartExecutionInput = {
-      "stateMachineArn": statemachine_arn,
-      "input": "{}"
+      stateMachineArn: statemachine_arn,
+      input: `{"feedId": ""}`
     }
     const stepFunctions = new AWS.StepFunctions()
     const stateMachine = await stepFunctions.startExecution(params).promise()
